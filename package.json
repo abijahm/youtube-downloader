@@ -9,14 +9,19 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "server": "node api/app.js"
   },
   "main": "index.js",
   "dependencies": {
+    "@koa/router": "^9.3.1",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
+    "googleapis": "^55.0.0",
     "koa": "^2.13.0",
     "tailwindcss": "^1.5.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "ytdl-core": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
