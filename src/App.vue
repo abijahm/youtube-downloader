@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="px-2">
+  <div id="app" class="px-2" @click="$emit('appclicked',$event.target)">
   <h1 class="text-center text-2xl font-semibold text-gray-700">Youtube Video Downloder</h1>
   <search-input id="search">Search</search-input>
   <search-results></search-results>
