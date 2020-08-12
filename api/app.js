@@ -7,6 +7,14 @@ const ytRoute = require("./routes/ytsearch")
 const ytdRoute = require("./routes/ytdl")
 const PORT = process.env.PORT || 3000
 
+//Set CORS
+app.use(async (ctx, next)=>{
+  ctx.set("Access-Control-Allow-Origin","*")
+  ctx.set("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept")
+  ctx.set("Access-Control-Allow-Methods","POST, GET, PUT, DELETE, OPTIONS")
+  await next()
+})
+
 app.use(ytRoute.routes())
 app.use(ytdRoute.routes())
 app.listen(PORT)

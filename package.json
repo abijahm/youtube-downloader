@@ -15,6 +15,7 @@
   "main": "index.js",
   "dependencies": {
     "@koa/router": "^9.3.1",
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "googleapis": "^55.0.0",
@@ -44,7 +45,8 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+    }
   },
   "browserslist": [
     "> 1%",

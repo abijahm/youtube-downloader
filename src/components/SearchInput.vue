@@ -7,8 +7,11 @@
       <input 
 	:id="id" 
 	type="text" 
+	v-model="searchTerm"
 	class="w-9/12 md:w-10/12 p-2 border-2 border-red-600 rounded">
-      <button class="ml-1 uppercase bg-red-600 text-white align-top rounded text-xs font-semibold">
+      <button 
+	@click="search"
+	class="ml-1 uppercase bg-red-600 text-white align-top rounded text-xs font-semibold">
 	Search
       </button>
     </div>
@@ -16,13 +19,41 @@
 </template>
 
  <script>
+ import axios from "axios";
+
  export default {
   name: "SearchInput",
   props: {
     id:String
   },
-  data: function (){
+  data(){
     return {
+      searchTerm: "Amapiano"
+    }
+  },
+  methods: {
+    search(){
+      /* eslint-disable no-control-regex,no-useless-escape */
+      let urlRegex = /https?:\/\/(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
+      let isUrl = urlRegex.test(this.searchTerm)
+      console.log(isUrl)
+      if(isUrl){
+	this.videoInfo()
+      }else{
+	this.searchYoutube()
+      }
+    },
+    searchYoutube(){
+      axios.get("http://localhost:3000/search/amapiano")
+      .then(res => {
+	console.log(res)
+      })
+    },
+    videoInfo(){
+      axios.get("http://localhost:3000/info/UGN6EUi4Yio")
+      .then(res => {
+	console.log(res)
+      })
     }
   }
  }
