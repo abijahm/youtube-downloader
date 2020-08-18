@@ -19,7 +19,7 @@
 </template>
 
  <script>
- import axios from "axios";
+ import { store } from "../store/store.js";
 
  export default {
   name: "SearchInput",
@@ -33,26 +33,40 @@
   },
   methods: {
     search(){
-      /* eslint-disable no-control-regex,no-useless-escape */
-      let urlRegex = /https?:\/\/(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
-      let isUrl = urlRegex.test(this.searchTerm)
-      console.log(isUrl)
+      const isUrl = store.isUrl(this.searchTerm)
       if(isUrl){
-	this.videoInfo()
+	if(!this.searchTerm.startsWith("http")){
+	this.searchTerm = "https://"+this.searchTerm
+	}
+	const url = new URL(this.searchTerm)
+	const videoId = url.searchParams.get('v')
+	this.getVideoInfo(videoId)
       }else{
-	this.searchYoutube()
+	this.searchYoutube(this.searchTerm)
       }
     },
-    searchYoutube(){
-      axios.get("http://localhost:3000/search/amapiano")
-      .then(res => {
-	console.log(res)
+    searchYoutube(searchString){
+      this.$parent.setLoadingStatus(true)
+      store.searchYoutube(searchString)
+      .then(data => {
+	this.$parent.setVideos(data)
+	this.$parent.setLoadingStatus(false)
       })
     },
-    videoInfo(){
-      axios.get("http://localhost:3000/info/UGN6EUi4Yio")
-      .then(res => {
-	console.log(res)
+    getVideoInfo(videoId){
+      this.$parent.setLoadingStatus(true)
+      store.getVideoInfo(videoId)
+      .then(({ formats, videoDetails}) => {
+	const videos = [{
+	videoUrl: videoDetails.video_url,
+	formats: formats.splice(0,5),
+	videoId: videoDetails.videoId,
+	title: videoDetails.title,
+	thumbnail: videoDetails.thumbnail.thumbnails[0].url
+	}]
+	console.log(videoDetails.thumbnail)
+	this.$parent.setVideos(videos)
+	this.$parent.setLoadingStatus(false)
       })
     }
   }

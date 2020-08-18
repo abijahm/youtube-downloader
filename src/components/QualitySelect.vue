@@ -1,7 +1,8 @@
 <template>
   <article class="table cursor-pointer relative pb-2">
     <p class="uppercase text-xs font-semibold">Select File</p>
-    <button class="inline-block uppercase px-1 py-1 bg-red-600 text-gray-100 md:font-medium md:text-sm shadow text-xs font-normal">Download</button>
+    <button @click="download" class="inline-block uppercase px-1 py-1 bg-red-600 text-gray-100 md:font-medium md:text-sm shadow text-xs font-normal">Download</button>
+    <a id="download" :href="selected.url" :download="downloadFile"></a>
     <div class="uppercase text-xs font-normal md:text-sm md:font-medium text-gray-800 md:pl-4 pl-2 py-1 shadow bg-white inline-block" @click="toggleActive">
     <span>
       <template v-if="Object.entries(selected).length">{{selected.container}} - {{selected.height || 'Audio'}}</template>
@@ -16,7 +17,7 @@
       :key="index"
       :hasVideo="format.hasVideo"
       :container="format.container"
-      :quality="format.quality"
+      :height="format.height"
       :hasAudio="format.hasAudio"
       :index="index">
       </quality-option>
@@ -48,7 +49,8 @@ export default {
     QualityOption
   },
   props: {
-    formats: Array
+    formats: Array,
+    title: String
   },
   data: function(){
     return {
@@ -60,7 +62,7 @@ export default {
     toggleActive: function(){
       this.active = !this.active
       if(!this.formats.length){
-	//load Formats
+	/*load Formats*/
 	this.$parent.getFormats()
       }
     },
@@ -71,9 +73,18 @@ export default {
       this.selected.index = index
     },
     download: function(){
+      let fileAnchor = document.createElement('a')
+      fileAnchor.href = this.selected.url
+      fileAnchor.setAttribute('download', this.downloadFile)
+      document.body.appendChild(fileAnchor)
+      fileAnchor.click()
+      console.log(this.$refs)
     }
   },
-  mounted: function(){
+  computed:{
+    downloadFile(){
+      return this.title+"."+this.selected.container
+    }
   }
 }
 </script>

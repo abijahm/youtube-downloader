@@ -7,7 +7,7 @@
       </template>
       <span class="text-gray-700 text-sm">
       <template v-if="!hasVideo">No Video</template>
-      <template v-else>{{quality}}</template>
+      <template v-else>{{height}}</template>
       </span>
     </div>
   </li>
@@ -24,7 +24,8 @@ export default {
   props: {
     index: Number,
     hasVideo: Boolean,
-    quality: String,
+    /*quality: String,*/
+    height:Number,
     hasAudio: Boolean,
     container: String
   },

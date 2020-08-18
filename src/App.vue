@@ -2,7 +2,7 @@
   <div id="app" class="px-2" @click="$emit('appclicked',$event.target)">
   <h1 class="text-center text-2xl font-semibold text-gray-700">Youtube Video Downloder</h1>
   <search-input id="search">Search</search-input>
-  <search-results :videos="videos"></search-results>
+  <search-results :videos="videos" :loading="loading"></search-results>
   </div>
 </template>
 
@@ -19,7 +19,16 @@ export default {
   },
   data(){
     return {
-      videos: store.state.videos
+      videos: store.getVideos(),
+      loading: store.state.loading
+    }
+  },
+  methods:{
+    setLoadingStatus(status){
+      this.loading = status
+    },
+    setVideos(videos){
+      this.videos = videos
     }
   }
 }
