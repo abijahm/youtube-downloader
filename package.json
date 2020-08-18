@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "googleapis": "^55.0.0",
     "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
     "tailwindcss": "^1.5.1",
     "vue": "^2.6.11",
     "ytdl-core": "^3.1.2"

@@ -5,7 +5,7 @@
     <a :href="videoUrl" class="hover:underline hover:text-indigo-600 md:text-base text-sm underline" target="_blank">{{video.title}}</a>
     <div class="mt-1 flex flex-row">
       <!-- video formats -->
-      <quality-select :formats="video.formats" :title="video.title"></quality-select>
+      <quality-select :formats="video.formats" :title="video.title" :videoId="video.videoId"></quality-select>
     </div>
   </div>
 </article>
@@ -34,16 +34,6 @@ export default {
       .then(({formats}) =>{
 	this.video.formats = formats.slice(0,5)
       })
-      /*axios.get("http://localhost:3000/info/"+this.video.videoId)*/
-      /*.then(({data : {formats: formats}}) => {*/
-	/*let audios = formats.filter(format => {*/
-	/*return format.hasAudio && !format.hasVideo*/
-	/*})*/
-	/*let videos = formats.filter(format => {*/
-	/*return format.hasVideo;*/
-	/*})*/
-	/*this.video.formats = formats.slice(0, 5)*/
-      /*})*/
   }
   },
   computed :{

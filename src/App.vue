@@ -29,6 +29,9 @@ export default {
     },
     setVideos(videos){
       this.videos = videos
+    },
+    clearVideos(){
+      this.videos = []
     }
   }
 }

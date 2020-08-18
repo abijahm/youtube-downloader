@@ -41,7 +41,16 @@ export const store = {
 	  return format.hasVideo
 	})
 	let audioVideo = videos.filter(video => video.hasVideo && video.hasAudio)
-	let noAudio = videos.filter(video => video.hasVideo && !video.hasAudio)
+	let foundQuality = {} 
+	let noAudio = videos.filter(video => { //remove duplicate qualities
+	  let shouldAdd = false
+	  if(!foundQuality[video.height]){
+	    shouldAdd = true
+	    foundQuality[video.height] = video.container
+	  }
+	  return video.hasVideo && !video.hasAudio && shouldAdd
+	})
+	//sort and remove duplicates
 	res.data.formats = [...audioVideo, ...noAudio]
 	resolve(res.data)
       }).catch(err =>{

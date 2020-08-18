@@ -50,7 +50,8 @@ export default {
   },
   props: {
     formats: Array,
-    title: String
+    title: String,
+    videoId: String
   },
   data: function(){
     return {
@@ -73,12 +74,19 @@ export default {
       this.selected.index = index
     },
     download: function(){
+      if(!this.formats.length) return
+      const url = new URL(this.selected.url)
+      url.searchParams.set("video_id",this.videoId)
+      url.searchParams.set("title",this.title)
+
       let fileAnchor = document.createElement('a')
-      fileAnchor.href = this.selected.url
+      fileAnchor.href = url.href
       fileAnchor.setAttribute('download', this.downloadFile)
       document.body.appendChild(fileAnchor)
       fileAnchor.click()
-      console.log(this.$refs)
+      setTimeout(() => {
+	document.body.removeChild(fileAnchor)
+      },200)
     }
   },
   computed:{

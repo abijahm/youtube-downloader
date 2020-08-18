@@ -28,11 +28,12 @@
   },
   data(){
     return {
-      searchTerm: "Amapiano"
+      searchTerm: ""
     }
   },
   methods: {
     search(){
+      this.$parent.clearVideos()
       const isUrl = store.isUrl(this.searchTerm)
       if(isUrl){
 	if(!this.searchTerm.startsWith("http")){
@@ -64,7 +65,6 @@
 	title: videoDetails.title,
 	thumbnail: videoDetails.thumbnail.thumbnails[0].url
 	}]
-	console.log(videoDetails.thumbnail)
 	this.$parent.setVideos(videos)
 	this.$parent.setLoadingStatus(false)
       })
