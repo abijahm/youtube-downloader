@@ -1,6 +1,15 @@
 # youtube-dl
+> Search and Download Youtube videos
+
+The project excepts a youtube api key to allow searching on youtube
+set it in your environment variables
+```
+YT_APIKEY=<apikey>
+```
 
 ## Project setup
+
+Install Projects dependencies
 ```
 yarn install
 ```
@@ -11,6 +20,7 @@ yarn serve
 ```
 
 ### Compiles and minifies for production
+
 ```
 yarn build
 ```
@@ -20,5 +30,7 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Runs a koa.js server
+```
+yarn server
+```

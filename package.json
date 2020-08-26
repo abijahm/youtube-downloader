@@ -21,11 +21,13 @@
     "googleapis": "^55.0.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-static": "^5.0.0",
     "tailwindcss": "^1.5.1",
     "vue": "^2.6.11",
     "ytdl-core": "^3.1.2"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
     "@types/jest": "^26.0.10",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",

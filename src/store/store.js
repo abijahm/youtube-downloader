@@ -1,10 +1,14 @@
 import axios from "axios";
+let baseUrl = "";
 
+if(process.env.NODE_ENV !== "production"){
+  baseUrl = "http://localhost:3000"
+}
 export const store = {
   state: {
     loading: false,
     youtubeUrl: "https://youtube.com?v=",
-    baseUrl: "http://localhost:3000",
+    baseUrl: baseUrl,
     videos: [
     ]
   },
